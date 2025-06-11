@@ -136,7 +136,7 @@ mail_frame.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 ttk.Label(mail_frame, text="📧 Informations Mail", font=("Arial", 14, "bold")).pack(anchor="w", padx=10, pady=10)
 mail_content = ttk.Frame(mail_frame)
 mail_content.pack(fill="both", expand=True, padx=20, pady=10)
-ttk.Label(mail_content, text="📧 État de ", style="TLabel").grid(row=0, column=0, sticky="w")
+ttk.Label(mail_content, text="📧 État de Postfix :", style="TLabel").grid(row=0, column=0, sticky="w")
 ttk.Label(mail_content, textvariable=postfix_info, style="TLabel").grid(row=0, column=1, sticky="w")
 
 # System resources frame
@@ -254,7 +254,7 @@ def refresh_data():
     except: local_time.set(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     try: timezone.set(get_timezone())
     except: timezone.set("Unknown")
-    try: postfix_info.set(f"Postfix: {get_postfix_status()}")
+    try: postfix_info.set(get_postfix_status())
     except: postfix_info.set("Postfix: Status unknown")
     try: cpu_usage.set(get_cpu_usage())
     except: cpu_usage.set("N/A")
