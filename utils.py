@@ -1,3 +1,4 @@
+import re
 import subprocess
 import psutil
 import time
@@ -92,3 +93,32 @@ def get_recent_mail_logs(n=10):
             return tail_file(path, n)
     
     return ["Mail logs not found"]
+
+def categorize_log(line):
+    line_lower = line.lower()
+    if re.search(r'sudo:.*command=', line_lower):
+        return "Commande avec Privilèges (sudo)"
+
+    if "session opened" in line_lower:
+        if "sudo" in line_lower:
+            return "Session Sudo Démarrée"
+        return "Connexion Réussie"
+
+    if "session closed" in line_lower:
+        if "sudo" in line_lower:
+            return "Session Sudo Terminée"
+        return "Fin de Session"
+
+    if "authentication failure" in line_lower or "failed password" in line_lower or "failed su" in line_lower:
+        return "Échec d’Authentification"
+    
+    if "status=sent" in line_lower or "status=deliverable" in line_lower:
+        return "Mail Envoyé"
+
+    if "from=" in line_lower and "postfix/qmgr" in line_lower:
+        return "Mail Reçu"
+
+    if "status=bounced" in line_lower or "status=deferred" in line_lower or "status=expired" in line_lower:
+        return "Échec d’Envoi de Mail"
+        
+    return 'Autre'
