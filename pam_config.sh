@@ -65,7 +65,7 @@ echo "[*] Installation et configuration de la politique de mot de passe..."
 apt-get update > /dev/null
 apt-get install -y libpam-pwquality
 
-PWQUALITY_LINE="password requisite pam_pwquality.so retry=3 minlen=12 dcredit=-1 ucredit=-1 lcredit=-1 ocredit=-1 reject_username"
+PWQUALITY_LINE="password requisite pam_pwquality.so retry=3 minlen=12 dcredit=-1 ucredit=-1 lcredit=-1 ocredit=-1 reject_username dictcheck=1"
 
 if grep -q "pam_pwquality.so" "$COMMON_PASS_FILE"; then
     sed -i "s/.*pam_pwquality.so.*/$PWQUALITY_LINE/" "$COMMON_PASS_FILE"
