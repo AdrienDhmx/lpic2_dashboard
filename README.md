@@ -1,5 +1,7 @@
 # LPIC2 Dashboard – Projet Client/Serveur
 
+[Lien vers le diaporama, comprenant les vidéos de démonstration](https://docs.google.com/presentation/d/1vjV2XhicnJ6jEJ2SqWE6j2HJEWw9ZDGio6SXLzISlxA/edit?usp=sharing)
+
 ## Objectif
 
 Ce projet met en œuvre une architecture client-serveur sous Linux, intégrant :
